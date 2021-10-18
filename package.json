@@ -1,0 +1,12 @@
+{
+  "name": "covid-horses",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Dan Coates <mail@dancoat.es>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.23.0",
+    "luxon": "^2.0.2",
+    "table-scraper": "^1.0.3"
+  }
+}
