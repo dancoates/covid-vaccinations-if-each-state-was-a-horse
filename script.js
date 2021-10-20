@@ -17,7 +17,7 @@ const lerp =  (v1, v2, amt) => {
 (async () => {
     // state
     let day = 0;
-    let playing = false;
+    let playing = true;
     let previousDay = -1;
     let frame = 0;
     const speed = 0.2;
@@ -59,6 +59,7 @@ const lerp =  (v1, v2, amt) => {
     playButton.addEventListener('click', (e) => {
         e.preventDefault();
         playing = !playing;
+        playButton.className = playing ? 'playing': 'paused';
     });
 
 
@@ -71,6 +72,7 @@ const lerp =  (v1, v2, amt) => {
                 control.value = day;
             } else {
                 playing = false;
+                playButton.className = 'paused';
             }
         }
 
