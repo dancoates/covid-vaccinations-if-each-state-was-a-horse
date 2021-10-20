@@ -3,10 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=720, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Document</title>
 </head>
 <body>
 
+    <div class="course_outer">
+        <div class="controls">
+            <div class="day_display"><span id="day"></span></div>
+            <button id="play">►</button>
+            <input type="range" id="control" value="0" step="0.1">
+        </div>
+        <div class="course">
+            <div class="horse" id="nsw">
+                <span class="horse_name">nsw</span>
+                <span class="horse_front"></span>
+                <span class="horse_middle">
+                    <span class="horse_blanket"></span>
+                </span>
+                <span class="horse_back"></span>
+            </div>
+            <div class="horse" id="vic">
+                <span class="horse_name">vic</span>
+                <span class="horse_front"></span>
+                <span class="horse_middle">
+                    <span class="horse_blanket"></span>
+                </span>
+                <span class="horse_back"></span>
+            </div>
+            <div class="horse" id="qld">
+                <span class="horse_name">qld</span>
+                <span class="horse_front"></span>
+                <span class="horse_middle">
+                    <span class="horse_blanket"></span>
+                </span>
+                <span class="horse_back"></span>
+            </div>
+            <div class="horse" id="act">
+                <span class="horse_name">act</span>
+                <span class="horse_front"></span>
+                <span class="horse_middle">
+                    <span class="horse_blanket"></span>
+                </span>
+                <span class="horse_back"></span>
+            </div>
+            <div class="horse" id="wa">
+                <span class="horse_name">wa</span>
+                <span class="horse_front"></span>
+                <span class="horse_middle">
+                    <span class="horse_blanket"></span>
+                </span>
+                <span class="horse_back"></span>
+            </div>
+            <div class="horse" id="sa">
+                <span class="horse_name">sa</span>
+                <span class="horse_front"></span>
+                <span class="horse_middle">
+                    <span class="horse_blanket"></span>
+                </span>
+                <span class="horse_back"></span>
+            </div>
+            <div class="horse" id="tas">
+                <span class="horse_name">tas</span>
+                <span class="horse_front"></span>
+                <span class="horse_middle">
+                    <span class="horse_blanket"></span>
+                </span>
+                <span class="horse_back"></span>
+            </div>
+            <div class="horse" id="nt">
+                <span class="horse_name">nt</span>
+                <span class="horse_front"></span>
+                <span class="horse_middle">
+                    <span class="horse_blanket"></span>
+                </span>
+                <span class="horse_back"></span>
+            </div>
+
+
+            <div class="pct_line" style="left: 10%;"><span>10%</span></div>
+            <div class="pct_line" style="left: 15%;"><span>15%</span></div>
+            <div class="pct_line" style="left: 20%;"><span>20%</span></div>
+            <div class="pct_line" style="left: 25%;"><span>25%</span></div>
+            <div class="pct_line" style="left: 30%;"><span>30%</span></div>
+            <div class="pct_line" style="left: 35%;"><span>35%</span></div>
+            <div class="pct_line" style="left: 40%;"><span>40%</span></div>
+            <div class="pct_line" style="left: 45%;"><span>45%</span></div>
+            <div class="pct_line" style="left: 50%;"><span>50%</span></div>
+            <div class="pct_line" style="left: 55%;"><span>55%</span></div>
+            <div class="pct_line" style="left: 60%;"><span>60%</span></div>
+            <div class="pct_line" style="left: 65%;"><span>65%</span></div>
+            <div class="pct_line" style="left: 70%;"><span>70%</span></div>
+            <div class="pct_line" style="left: 75%;"><span>75%</span></div>
+            <div class="pct_line" style="left: 80%;"><span>80%</span></div>
+            <div class="pct_line" style="left: 85%;"><span>85%</span></div>
+            <div class="pct_line" style="left: 90%;"><span>90%</span></div>
+            <div class="pct_line" style="left: 95%;"><span>95%</span></div>
+            <div class="pct_line" style="left: 100%;"><span>100%</span></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/luxon@2.0.2/build/global/luxon.min.js" integrity="sha256-CnZmNCHHUMy22/PJclCIISZ5Ib4MnUu+7ee5YNxtsZQ=" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
 </body>
 </html>

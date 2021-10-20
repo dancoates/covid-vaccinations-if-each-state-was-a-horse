@@ -1,0 +1,306 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+.controls {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 15px;
+
+}
+
+#control {
+    width: calc(100% - 300px);
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.day_display {
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 18px;
+    display: inline-block;
+    width: 150px;
+    vertical-align: middle;
+}
+
+#play {
+    outline: none;
+    background: #002776;
+    border: none;
+    padding: 5px 15px;
+    color: white;
+    border-radius: 3px;
+    margin-right: 15px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+#play:hover {
+    cursor: pointer;
+    background: #093794;
+}
+
+.course_outer {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: url('bg.png');
+    background-repeat: repeat;
+    overflow: hidden;
+    padding-top: 130px;
+    padding-bottom: 30px;
+    padding-right: 50px;
+}
+
+.course {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin-left: -10%;
+}
+
+
+.horse {
+    height: 12.5%;
+    left: 0%;
+    right: 100%;
+    position: absolute;
+    z-index: 2;
+}
+
+.horse_name {
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: block;
+    position: absolute;
+    left: 100%;
+    padding-left: 10px;
+    top: 30px;
+}
+
+.horse_back {
+    background-image: url('run_back.png');
+    background-repeat: no-repeat;
+    width: 60px;
+    height: 66px;
+    display: block;
+    position: absolute;
+    left: -25px;
+    top: 5px;
+}
+
+.horse_front {
+    background-image: url('run_front.png');
+    background-repeat: no-repeat;
+    width: 60px;
+    height: 66px;
+    display: block;
+    position: absolute;
+    right: -3px;
+    top: 5px;
+}
+
+
+.horse_middle {
+    display: block;
+    position: absolute;
+    top: 25px;
+    left: 35px;
+    right: 57px;
+    height: 25px;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    background: #703016;
+}
+
+.horse_blanket {
+    background: rgb(48, 68, 121);
+    background-repeat: no-repeat;
+    top: 0;
+    position: absolute;
+    display: block;
+    width: 32px;
+    height: 16px;
+    right: 5px;
+    border-radius: 0 0 3px 3px;
+    box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.3)
+}
+
+#nsw .horse_blanket {
+    background-image: url('blanket_nsw.png');
+}
+
+#vic .horse_blanket {
+    background-image: url('blanket_vic.png');
+}
+
+#qld .horse_blanket {
+    background-image: url('blanket_qld.png');
+}
+
+#act .horse_blanket {
+    background-image: url('blanket_act.png');
+}
+
+#wa  .horse_blanket {
+    background-image: url('blanket_wa.png');
+}
+
+#sa  .horse_blanket {
+    background-image: url('blanket_sa.png');
+}
+
+#tas .horse_blanket {
+    background-image: url('blanket_tas.png');
+}
+
+#nt  .horse_blanket {
+    background-image: url('blanket_nt.png');
+}
+
+.horse_blanket::after {
+    content: " ";
+    position: absolute;
+    width: 2px;
+    left: 50%;
+    margin-left: -1px;
+    background: black;
+    top: 100%;
+    height: 6px;
+}
+
+
+.horse.frame4 .horse_middle,
+.horse.frame5 .horse_middle {
+    top: 23px;
+}
+
+.horse_middle::before {
+    content: " ";
+    top: 0;
+    height: 2px;
+    background: #441807;
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.horse_middle::after {
+    content: " ";
+    bottom: 0;
+    height: 2px;
+    background: #441807;
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+
+.horse.frame5 .horse_back {
+    background-position: 0 0;
+}
+
+.horse.frame5 .horse_front {
+    background-position: -60px 0;
+}
+
+.horse.frame4 .horse_back {
+    background-position: -120px 0;
+}
+
+.horse.frame4 .horse_front {
+    background-position: -180px 0;
+}
+
+.horse.frame3 .horse_back {
+    background-position: -240px 0;
+}
+
+.horse.frame3 .horse_front {
+    background-position: -300px 0;
+}
+
+.horse.frame2 .horse_back {
+    background-position: -360px 0;
+}
+
+.horse.frame2 .horse_front {
+    background-position: -420px 0;
+}
+
+.horse.frame1 .horse_back {
+    background-position: -480px 0;
+}
+
+.horse.frame1 .horse_front {
+    background-position: -540px 0;
+}
+
+.horse.frame0 .horse_back {
+    background-position: -600px 0;
+}
+
+.horse.frame0 .horse_front {
+    background-position: -660px 0;
+}
+
+
+
+
+
+
+#nsw {
+    top: 0%;
+}
+#vic {
+    top: 12.5%;
+}
+#qld {
+    top: 25%;
+}
+#act {
+    top: 37.5%;
+}
+#wa {
+    top: 50%;
+}
+#sa {
+    top: 62.5%;
+}
+#tas {
+    top: 75%;
+}
+#nt {
+    top: 87.5%;
+}
+
+.pct_line {
+    width: 1px;
+    height: 100%;
+    top: 0;
+    position: absolute;
+    background: rgba(255,255,255,0.2);
+    z-index: 1;
+}
+
+.pct_line span {
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 10px;
+    bottom: 100%;
+    left: 5px;
+    display: block;
+    position: absolute;
+}
