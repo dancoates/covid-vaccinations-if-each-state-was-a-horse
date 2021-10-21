@@ -33,18 +33,13 @@ const lerp =  (v1, v2, amt) => {
     const dayDisplay = document.getElementById('day');
     const control = document.getElementById('control');
     const playButton = document.getElementById('play');
-    const horses = {
-        nsw: document.getElementById('nsw'),
-        vic: document.getElementById('vic'),
-        qld: document.getElementById('qld'),
-        act: document.getElementById('act'),
-        wa: document.getElementById('wa'),
-        sa: document.getElementById('sa'),
-        tas: document.getElementById('tas'),
-        nt: document.getElementById('nt')
-    };
-
-
+	const states = ["nsw", "vic", "qld", "act", "wa", "sa", "tas", "nt"];
+	
+	let horses = {};
+	for (var i = 0; i < states.length; i++) {
+		horses[states[i]] = document.getElementById(states[i]);
+	}
+    
     // set control minmax
     control.min = 0;
     control.max = data.length - 1;
@@ -89,7 +84,9 @@ const lerp =  (v1, v2, amt) => {
 
         dayDisplay.textContent = luxon.DateTime.fromISO(dd.date).toLocaleString(luxon.DateTime.DATE_MED);
 
-		for (const state in horses) {
+		for (var i = 0; i < states.length; i++) {
+			var state = states[i];
+			
 			horses[state].className = `horse frame${frame}`;
 			horses[state].style.left = toPercent(lerp(dd[state+"_second_percent"], nd[state+"_second_percent"], rt));
 			horses[state].style.right = toInvPercent(lerp(dd[state+"_first_percent"], nd[state+"_first_percent"], rt));
