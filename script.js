@@ -62,9 +62,6 @@ const lerp =  (v1, v2, amt) => {
         playButton.className = playing ? 'playing': 'paused';
     });
 
-	console.log(horses);
-	
-	
 
     // anim loop
     function step() {
