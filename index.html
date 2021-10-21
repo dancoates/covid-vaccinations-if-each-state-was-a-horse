@@ -11,14 +11,23 @@
 
     <div class="course_outer">
         <div class="controls">
-            <div class="day_display"><span id="day"></span></div>
-            <button id="play"></button>
-            <input type="range" id="control" value="0" step="0.1">
+            <div class="controls_row">
+                <div class="data_selector">
+                    <div id="twelvePlus" class="active">12+</div>
+                    <div id="twelveToFifteen">12-15</div>
+                    <div id="sixteenPlus">16+</div>
+                    <div id="fiftyPlus">50+</div>
+                    <div id="seventyPlus">70+</div>
+                </div>
+                <button id="play"></button>
+                <input type="range" id="control" value="0" step="0.1">
+            </div>
+            <div class="controls_row">
+                <div class="day_display"><span id="day"></span></div>
+            </div>
+
         </div>
-        <div class="info">
-            The nose of each horse is the 12+ 1st dose percentage and the behind of each horse is the 12+ 2nd dose percentage. The data is obtained from the excellent: <a href="https://covidlive.com.au">covidlive.com.au</a>. The (very bad) source code is <a href="https://github.com/dancoates/covid-vaccinations-if-each-state-was-a-horse">here.</a>
-            Sorry if you are on mobile, it's probably horribly broken.
-        </div>
+
         <div class="course">
             <div class="horse" id="nsw">
                 <span class="horse_name">nsw</span>
@@ -105,6 +114,14 @@
             <div class="pct_line" style="left: 90%;"><span>90%</span></div>
             <div class="pct_line" style="left: 95%;"><span>95%</span></div>
             <div class="pct_line" style="left: 100%;"><span>100%</span></div>
+        </div>
+
+        <div class="info">
+            The nose of each horse is the 1st dose percentage and the behind of each horse is the 2nd dose percentage.
+            Data Sources: 12+ data is obtained from the excellent: <a href="https://covidlive.com.au">covidlive.com.au</a>.
+            All other age groups come from data compiled and organized by <a href="https://github.com/jxeeno/aust-govt-covid19-vaccine-pdf">Ken Tsang</a>, with the original data sources being the Department of Health for most data and WA second dose data prior to 1st July 2021 coming from WA Health.
+            The (very bad) source code is <a href="https://github.com/dancoates/covid-vaccinations-if-each-state-was-a-horse">here.</a>
+            The horse's rear overtaking the head is a feature not a bug. Sorry if you are on mobile, it's probably horribly broken.
         </div>
     </div>
 

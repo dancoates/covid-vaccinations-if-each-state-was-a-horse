@@ -19,31 +19,51 @@ const lerp =  (v1, v2, amt) => {
     let day = 0;
     let playing = true;
     let previousDay = -1;
-    let frame = 0;
     const speed = 0.2;
     const animSpeed = 0.5;
 
 
     // get data
-    const resp = await fetch('data.json');
-    const rawData = await resp.json();
-    const data = rawData.filter(ii => ii.date >= '2021-04-01');
+    const twelvePlusData = await (await fetch('twelvePlus.json')).json();
+    const twelveToFifteenData = await (await fetch('twelveToFifteen.json')).json();
+    const sixteenPlusData = await (await fetch('sixteenPlus.json')).json();
+    const fiftyPlusData = await (await fetch('fiftyPlus.json')).json();
+    const seventyPlusData = await (await fetch('seventyPlus.json')).json();
+
+    let data = twelvePlusData;
 
     // get elems
     const dayDisplay = document.getElementById('day');
     const control = document.getElementById('control');
     const playButton = document.getElementById('play');
+    const twelvePlusElem = document.getElementById('twelvePlus');
+    const twelveToFifteenElem = document.getElementById('twelveToFifteen');
+    const sixteenPlusElem = document.getElementById('sixteenPlus');
+    const fiftyPlusElem = document.getElementById('fiftyPlus');
+    const seventyPlusElem = document.getElementById('seventyPlus');
+
 	const states = ["nsw", "vic", "qld", "act", "wa", "sa", "tas", "nt"];
-	
+
 	let horses = {};
 	for (var i = 0; i < states.length; i++) {
 		horses[states[i]] = document.getElementById(states[i]);
 	}
-    
-    // set control minmax
-    control.min = 0;
-    control.max = data.length - 1;
-    control.value = 0;
+
+    let reset = (newDay, setPlaying) => {
+        // set control minmax
+        control.min = 0;
+        control.max = data.length - 1;
+        control.value = newDay || 0;
+        day = newDay || 0;
+        previousDay = -1;
+
+        if(setPlaying) {
+            playButton.className = 'playing';
+            playing = true;
+        }
+    };
+
+    reset();
 
     // event listeners
     control.addEventListener('input', () => {
@@ -55,7 +75,34 @@ const lerp =  (v1, v2, amt) => {
         e.preventDefault();
         playing = !playing;
         playButton.className = playing ? 'playing': 'paused';
+        if(day >= data.length - 1) reset(null, true);
     });
+
+    const removeToggleClass = () => {
+        [...document.querySelectorAll('.data_selector div')].forEach(ii => {
+            ii.className = '';
+        });
+    };
+
+    const handler = (newData) => (e) => {
+        e.preventDefault();
+        removeToggleClass();
+        e.target.className = 'active';
+        const currentDate = data[Math.floor(day)].date;
+        const newDateIndex = newData.findIndex(ii => ii.date === currentDate);
+        data = newData;
+        if(newDateIndex !== -1) {
+            reset(newDateIndex);
+        } else {
+            reset();
+        }
+    };
+
+    twelvePlusElem.addEventListener('click', handler(twelvePlusData));
+    twelveToFifteenElem.addEventListener('click', handler(twelveToFifteenData));
+    sixteenPlusElem.addEventListener('click', handler(sixteenPlusData));
+    fiftyPlusElem.addEventListener('click', handler(fiftyPlusData));
+    seventyPlusElem.addEventListener('click', handler(seventyPlusData));
 
 
     // anim loop
@@ -86,7 +133,7 @@ const lerp =  (v1, v2, amt) => {
 
 		for (var i = 0; i < states.length; i++) {
 			var state = states[i];
-			
+
 			horses[state].className = `horse frame${frame}`;
 			horses[state].style.left = toPercent(lerp(dd[state+"_second_percent"], nd[state+"_second_percent"], rt));
 			horses[state].style.right = toInvPercent(lerp(dd[state+"_first_percent"], nd[state+"_first_percent"], rt));

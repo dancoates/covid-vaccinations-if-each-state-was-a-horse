@@ -1,6 +1,7 @@
 const scraper = require('table-scraper');
 const Luxon = require('luxon');
 const fs = require('fs/promises');
+const axios = require('axios');
 const getPercentsForState = (data, state) => {
     const stateData = data.find(ii => ii.STATE.toLowerCase() === state);
 
@@ -41,15 +42,12 @@ const cleanData = (data, field, max, maxPerc) => {
         });
 }
 
+const states = ['nsw', 'vic', 'qld', 'act', 'wa', 'sa', 'tas', 'nt'];
 
-(async () => {
-
+async function getTwelvePlus() {
     const firstDose = (state) => `https://covidlive.com.au/report/daily-vaccinations-first-doses/${state}`;
     const secondDose = (state) => `https://covidlive.com.au/report/daily-vaccinations-people/${state}`;
     const percentLow = 'https://covidlive.com.au/report/vaccinations-age-band-low';
-
-
-    const states = ['nsw', 'vic', 'qld', 'act', 'wa', 'sa', 'tas', 'nt'];
 
 
     const percentLowResult = await scraper.get(percentLow);
@@ -92,7 +90,48 @@ const cleanData = (data, field, max, maxPerc) => {
         });
 
     }
-    const sorted = Object.values(statesByDay).sort((a, b) => a.date > b.date ? 1 : -1);
+    const sorted = Object.values(statesByDay).sort((a, b) => a.date > b.date ? 1 : -1).filter(ii => ii.date >= '2021-04-01');
 
-    await fs.writeFile('data.json', JSON.stringify(sorted, null, 4));
-})().catch(err => console.error(err, err.stack));
+    await fs.writeFile('twelvePlus.json', JSON.stringify(sorted, null, 4));
+}
+
+const getStateData = (row, type) => {
+
+    const data = {
+        date: row.DATE_AS_AT,
+    };
+
+    states.forEach(state => {
+        const upperState = state.toUpperCase();
+        data[`${state}_first_absolute`] = row[`AIR_${upperState}_${type}_FIRST_DOSE_COUNT`],
+        data[`${state}_first_percent`] = row[`AIR_${upperState}_${type}_FIRST_DOSE_PCT`] / 100,
+        data[`${state}_second_absolute`] = row[`AIR_${upperState}_${type}_SECOND_DOSE_COUNT`],
+        data[`${state}_second_percent`] = row[`AIR_${upperState}_${type}_SECOND_DOSE_PCT`] / 100
+    });
+
+    return data;
+
+};
+
+async function getOthers() {
+    const resp = await axios.get('https://vaccinedata.covid19nearme.com.au/data/air.json');
+    const data = resp.data;
+
+    const twelveToFifteen = data.map((row) => getStateData(row, '12_15')).filter(row => row.nsw_first_absolute !== undefined);
+    const sixteenPlus = data.map((row) => getStateData(row, '16_PLUS')).filter(row => row.nsw_first_absolute !== undefined);;
+    const fiftyPlus = data.map((row) => getStateData(row, '50_PLUS')).filter(row => row.nsw_first_absolute !== undefined);;
+    const seventyPlus = data.map((row) => getStateData(row, '70_PLUS')).filter(row => row.nsw_first_absolute !== undefined);;
+
+    await fs.writeFile('twelveToFifteen.json', JSON.stringify(twelveToFifteen, null, 4));
+    await fs.writeFile('sixteenPlus.json', JSON.stringify(sixteenPlus, null, 4));
+    await fs.writeFile('fiftyPlus.json', JSON.stringify(fiftyPlus, null, 4));
+    await fs.writeFile('seventyPlus.json', JSON.stringify(seventyPlus, null, 4));
+}
+
+
+(async () => {
+
+    await getTwelvePlus().catch(err => console.error(err));
+    await getOthers().catch(err => console.error(err));
+
+})();
