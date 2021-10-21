@@ -62,6 +62,9 @@ const lerp =  (v1, v2, amt) => {
         playButton.className = playing ? 'playing': 'paused';
     });
 
+	console.log(horses);
+	
+	
 
     // anim loop
     function step() {
@@ -89,38 +92,11 @@ const lerp =  (v1, v2, amt) => {
 
         dayDisplay.textContent = luxon.DateTime.fromISO(dd.date).toLocaleString(luxon.DateTime.DATE_MED);
 
-
-        horses.nsw.className = `horse frame${frame}`;
-        horses.nsw.style.left = toPercent(lerp(dd.nsw_second_percent, nd.nsw_second_percent, rt));
-        horses.nsw.style.right = toInvPercent(lerp(dd.nsw_first_percent, nd.nsw_first_percent, rt));
-
-        horses.vic.className = `horse frame${frame}`;
-        horses.vic.style.left = toPercent(lerp(dd.vic_second_percent, nd.vic_second_percent, rt));
-        horses.vic.style.right = toInvPercent(lerp(dd.vic_first_percent, nd.vic_first_percent, rt));
-
-        horses.qld.className = `horse frame${frame}`;
-        horses.qld.style.left = toPercent(lerp(dd.qld_second_percent, nd.qld_second_percent, rt));
-        horses.qld.style.right = toInvPercent(lerp(dd.qld_first_percent, nd.qld_first_percent, rt));
-
-        horses.act.className = `horse frame${frame}`;
-        horses.act.style.left = toPercent(lerp(dd.act_second_percent, nd.act_second_percent, rt));
-        horses.act.style.right = toInvPercent(lerp(dd.act_first_percent, nd.act_first_percent, rt));
-
-        horses.wa.className = `horse frame${frame}`;
-        horses.wa.style.left = toPercent(lerp(dd.wa_second_percent, nd.wa_second_percent, rt));
-        horses.wa.style.right = toInvPercent(lerp(dd.wa_first_percent, nd.wa_first_percent, rt));
-
-        horses.sa.className = `horse frame${frame}`;
-        horses.sa.style.left = toPercent(lerp(dd.sa_second_percent, nd.sa_second_percent, rt));
-        horses.sa.style.right = toInvPercent(lerp(dd.sa_first_percent, nd.sa_first_percent, rt));
-
-        horses.tas.className = `horse frame${frame}`;
-        horses.tas.style.left = toPercent(lerp(dd.tas_second_percent, nd.tas_second_percent, rt));
-        horses.tas.style.right = toInvPercent(lerp(dd.tas_first_percent, nd.tas_first_percent, rt));
-
-        horses.nt.className = `horse frame${frame}`;
-        horses.nt.style.left = toPercent(lerp(dd.nt_second_percent, nd.nt_second_percent, rt));
-        horses.nt.style.right = toInvPercent(lerp(dd.nt_first_percent, nd.nt_first_percent, rt));
+		for (const state in horses) {
+			horses[state].className = `horse frame${frame}`;
+			horses[state].style.left = toPercent(lerp(dd[state+"_second_percent"], nd[state+"_second_percent"], rt));
+			horses[state].style.right = toInvPercent(lerp(dd[state+"_first_percent"], nd[state+"_first_percent"], rt));
+		}
 
         previousDay = day;
         window.requestAnimationFrame(step);
