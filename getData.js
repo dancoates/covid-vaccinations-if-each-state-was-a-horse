@@ -7,7 +7,7 @@ const getPercentsForState = (data, state) => {
 
     return {
         first: parseFloat(stateData['12+'].replace('%', '')) / 100,
-        second: parseFloat(stateData['12+%nbsp'].replace('%', '')) / 100
+        second: parseFloat(stateData['12+_2'].replace('%', '')) / 100
     };
 }
 
